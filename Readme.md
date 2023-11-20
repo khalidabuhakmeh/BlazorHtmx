@@ -100,6 +100,10 @@ You can see the image below that we can both invoke HTMX, navigate away and back
 
 ![blazor-htmx-browser.gif](blazor-htmx-browser.gif)
 
+Another example of the Counter.
+
+<video src="sample-video.mp4"></video>
+
 ## Conclusion
 
 It's possible to use HTMX with Blazor components, you just need to be aware of the Blazor lifecycle events and must reprocess HTMX between enhanced page loads. 

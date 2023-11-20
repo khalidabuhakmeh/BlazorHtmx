@@ -1,0 +1,42 @@
+@using System.ComponentModel.DataAnnotations
+@inject NavigationManager NavigationManager;
+
+@if (submitted)
+{
+    <div class="alert alert-success">Submitted @Command.Name!</div>
+}
+
+<div class="mb-5">
+    <EditForm Model="Command" method="post"
+              OnValidSubmit="SubmitOrder" FormName="@FormName"
+              Enhance="true"
+              >
+        <DataAnnotationsValidator/>
+        <ValidationSummary/>
+        <div>
+            <label>
+                Name:
+                <InputText @bind-Value="Command.Name" class="form-control"/>
+            </label>
+        </div>
+        <button class="mt-2 btn btn-primary" type="submit">Submit</button>
+    </EditForm>
+</div>
+
+
+@code {
+    bool submitted;
+
+    [EditorRequired, Parameter] public string FormName { get; set; }
+    [SupplyParameterFromForm] public UserInput Command { get; set; } = new();
+
+    private void SubmitOrder()
+    {
+        submitted = true;
+    }
+
+    public class UserInput
+    {
+        [Required] public string? Name { get; set; }
+    }
+}

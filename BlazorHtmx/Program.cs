@@ -8,6 +8,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
+builder.Services
+    .AddSingleton<HtmxCounter.HtmxCounterState>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -26,7 +29,18 @@ app.UseAntiforgery();
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
 
-app.MapGet("/love-htmx", 
-    () => new RazorComponentResult<LoveHtmx>());
+app.MapGet("/love-htmx",
+    () => new RazorComponentResult<LoveHtmx>(new { Message = "I ❤️ ASP.NET Core" }));
+
+
+app.MapPost("/count",
+    (HtmxCounter.HtmxCounterState value) =>
+    {
+        value.Value++;
+        return new RazorComponentResult<HtmxCounter>(
+            new { State = value }
+        );
+    });
+
 
 app.Run();

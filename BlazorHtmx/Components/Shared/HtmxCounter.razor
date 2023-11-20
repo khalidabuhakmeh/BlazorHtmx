@@ -1,0 +1,19 @@
+<div class="counter">
+    <p role="status">Current count: @State.Value</p>
+    <button class="btn btn-primary"
+            hx-post="/count"
+            hx-target="closest .counter"
+            hx-swap="outerHTML">
+        Click me
+    </button>
+</div>
+
+@code {
+    [Parameter, EditorRequired] 
+    public HtmxCounterState State { get; set; } = new();
+    
+    public class HtmxCounterState
+    {
+        public int Value { get; set; } = 0;
+    }
+}
