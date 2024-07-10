@@ -1,4 +1,5 @@
 using BlazorHtmx.Components;
+using BlazorHtmx.Components.Htmx;
 using BlazorHtmx.Components.Shared;
 using Microsoft.AspNetCore.Http.HttpResults;
 
@@ -10,6 +11,11 @@ builder.Services.AddRazorComponents()
 
 builder.Services
     .AddSingleton<HtmxCounter.HtmxCounterState>();
+
+builder.Services.AddControllers();
+
+builder.Services.AddScoped<HtmxContext>();
+builder.Services.AddScoped<IHtmxContext>(sp => sp.GetRequiredService<HtmxContext>());
 
 var app = builder.Build();
 
@@ -25,13 +31,12 @@ app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 app.UseAntiforgery();
+app.UseMiddleware<HtmxContext>();
 
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
 
-app.MapGet("/love-htmx",
-    () => new RazorComponentResult<LoveHtmx>(new { Message = "I ❤️ ASP.NET Core" }));
-
+app.MapControllers();
 
 app.MapPost("/count",
     (HtmxCounter.HtmxCounterState value) =>

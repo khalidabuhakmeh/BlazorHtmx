@@ -9,12 +9,30 @@
     <HtmxCounter State="CounterState"/>
 </div>
 
-<div>
+<div class="mb-4">
+    <LoveHtmx Message="I ❤️ Components"></LoveHtmx>    
+</div>
+
+<div class="mb-4">
     <button class="btn btn-primary"
             hx-swap="outerHTML"
             hx-get="/love-htmx">
         Click Me For Blazor + HTMX
     </button>
+</div>
+
+<div class="mb-4">
+    <button class="btn btn-primary"
+            hx-swap="outerHTML"
+            hx-get="/love-mbc">
+        Click Me For MBC + HTMX
+    </button>
+</div>
+
+<div class="mb-4">
+    <a href="/love-htmx" class="btn btn-primary">
+        Click Me For Blazor SSR
+    </a>
 </div>
 
 @code {

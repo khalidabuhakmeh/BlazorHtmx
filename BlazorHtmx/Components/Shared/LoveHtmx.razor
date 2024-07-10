@@ -1,3 +1,8 @@
+@page "/love-htmx"
+@inject IHtmxContext Htmx
+
+<title>I ❤️ Blazor</title>
+
 <div class="alert alert-info">
     <span class="text-lg-center">
         @Message
@@ -6,5 +11,10 @@
 
 @code{
     [Parameter]
-    public string? Message { get; set; } = "I ❤️ HTMX";
+    public string? Message { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        Message ??= Htmx.IsHtmx ? "I ❤️ HTMX" : "I ❤️ Blazor";
+    }
 }

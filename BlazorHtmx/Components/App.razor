@@ -1,4 +1,12 @@
-﻿<!DOCTYPE html>
+﻿@inject IHtmxContext Htmx
+
+@if ( Htmx.IsHtmx )
+{
+    <Routes />
+    return;
+}
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -11,7 +19,7 @@
     <link rel="icon" type="image/png" href="favicon.png"/>
 
     <script defer src="_framework/blazor.web.js"></script>
-    <script defer src="https://unpkg.com/htmx.org@1.9.8"></script>
+    <script defer src="https://unpkg.com/htmx.org@2.0.0"></script>
     <script defer src="js/htmx-blazor.js"></script>
     <HeadOutlet/>
 </head>

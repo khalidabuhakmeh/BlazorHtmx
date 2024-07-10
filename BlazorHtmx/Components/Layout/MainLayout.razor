@@ -1,4 +1,11 @@
 ﻿@inherits LayoutComponentBase
+@inject IHtmxContext Htmx
+
+@if ( Htmx.IsHtmx )
+{
+    @Body
+    return;
+}
 
 <div class="page">
     <div class="sidebar">
